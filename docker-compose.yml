@@ -1,0 +1,66 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: banco-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: banco
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.0
+    container_name: banco-zookeeper
+    restart: unless-stopped
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.0
+    container_name: banco-kafka
+    restart: unless-stopped
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: banco-zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://banco-kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+
+  api:
+    build:
+      context: ./src/BancoApi
+      dockerfile: Dockerfile
+
+    container_name: banco-api
+    restart: unless-stopped
+
+    ports:
+      - "5000:5000"
+
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=banco-postgres;Port=5432;Database=banco;Username=postgres;Password=postgres"
+      Kafka__BootstrapServers: "banco-kafka:9092"
+      Jwt__Key: "SeuSegredoMuitoForte12345678901234567890"
+      Jwt__Issuer: "BancoApi"
+      Jwt__Audience: "BancoApp"
+
+    depends_on:
+      - postgres
+      - kafka
+
+volumes:
+  postgres_data:

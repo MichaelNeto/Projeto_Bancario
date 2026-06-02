@@ -1,0 +1,568 @@
+/**
+ * Estilos globais para o Banco
+ */
+
+:root {
+    --primary-color: #1e40af;
+    --secondary-color: #059669;
+    --danger-color: #dc2626;
+    --warning-color: #f59e0b;
+    --success-color: #10b981;
+    --gray-light: #f3f4f6;
+    --gray-medium: #9ca3af;
+    --gray-dark: #374151;
+    --border-radius: 8px;
+    --box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --box-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--gray-dark);
+    background-color: var(--gray-light);
+}
+
+/* Alerts */
+.alert {
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    animation: slideIn 0.3s ease-in-out;
+    position: relative;
+    z-index: 1000;
+}
+
+.alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.alert-error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.alert-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fcd34d;
+}
+
+.alert-info {
+    background-color: #dbeafe;
+    color: #0c2d6b;
+    border: 1px solid #93c5fd;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Header / Navbar */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 16px 0;
+    box-shadow: var(--box-shadow);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+.nav-user {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+#logout-btn {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#logout-btn:hover {
+    background-color: #b91c1c;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--gray-dark);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+button, .btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover, .btn:hover {
+    transform: translateY(-2px);
+}
+
+button:active, .btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1e3a8a;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #047857;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #b91c1c;
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #059669;
+}
+
+/* Login Page */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+}
+
+.auth-box {
+    background-color: white;
+    padding: 32px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-lg);
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-box h1 {
+    margin-bottom: 24px;
+    text-align: center;
+    color: var(--gray-dark);
+    font-size: 28px;
+}
+
+.auth-box .form-group {
+    margin-bottom: 16px;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.auth-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard */
+.dashboard-container {
+    padding: 32px 0;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.dashboard-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--gray-dark);
+}
+
+.card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 24px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--gray-dark);
+}
+
+/* Saldo Card */
+.saldo-card {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+    color: white;
+}
+
+.saldo-label {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 8px;
+}
+
+#saldo {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Extrato */
+.extrato-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.extrato-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #f9fafb;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--gray-medium);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.extrato-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--box-shadow);
+}
+
+/* RN04 - Classes dinâmicas para extrato */
+
+/* Ganho - PIX Recebido (Verde) */
+.extrato-item.ganho {
+    border-left-color: var(--success-color);
+    background-color: #f0fdf4;
+}
+
+.extrato-item.ganho .extrato-valor {
+    color: var(--success-color);
+    font-weight: bold;
+}
+
+/* Gasto - PIX Enviado (Vermelho) */
+.extrato-item.gasto {
+    border-left-color: var(--danger-color);
+    background-color: #fef2f2;
+}
+
+.extrato-item.gasto .extrato-valor {
+    color: var(--danger-color);
+    font-weight: bold;
+}
+
+/* Estornado - Status FALHOU (Cinza/Riscado) */
+.extrato-item.estornado {
+    border-left-color: var(--gray-medium);
+    background-color: #f3f4f6;
+    opacity: 0.7;
+}
+
+.extrato-item.estornado .extrato-valor {
+    color: var(--gray-medium);
+    text-decoration: line-through;
+}
+
+.status-failed {
+    text-decoration: line-through;
+    color: var(--gray-medium) !important;
+}
+
+.extrato-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.extrato-info {
+    flex: 1;
+}
+
+.extrato-tipo {
+    font-weight: 600;
+    color: var(--gray-dark);
+    margin-bottom: 4px;
+}
+
+.extrato-data {
+    font-size: 12px;
+    color: var(--gray-medium);
+}
+
+.extrato-valor {
+    text-align: right;
+    font-size: 18px;
+}
+
+.extrato-motivo {
+    font-size: 12px;
+    color: var(--danger-color);
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+.extrato-descricao {
+    font-size: 12px;
+    color: var(--gray-medium);
+    margin-top: 8px;
+}
+
+.no-transactions {
+    text-align: center;
+    color: var(--gray-medium);
+    padding: 32px 0;
+    font-style: italic;
+}
+
+/* PIX Form */
+.pix-form-container {
+    margin-top: 24px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-row-full {
+    grid-column: 1 / -1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .extrato-header {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .extrato-valor {
+        text-align: left;
+    }
+    
+    .auth-box {
+        padding: 24px;
+    }
+    
+    #saldo {
+        font-size: 28px;
+    }
+    
+    header .container {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    .card {
+        padding: 16px;
+    }
+    
+    .auth-box {
+        padding: 16px;
+    }
+    
+    button, .btn {
+        width: 100%;
+        padding: 12px 16px;
+    }
+    
+    .form-group {
+        margin-bottom: 12px;
+    }
+    
+    .dashboard-title {
+        font-size: 22px;
+    }
+}
+
+/* Utilities */
+.text-center {
+    text-align: center;
+}
+
+.mt-2 {
+    margin-top: 16px;
+}
+
+.mb-2 {
+    margin-bottom: 16px;
+}
+
+.gap-2 {
+    gap: 16px;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.w-full {
+    width: 100%;
+}

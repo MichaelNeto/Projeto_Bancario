@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco - Cadastro</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <h1>📝 Criar Conta</h1>
+            
+            <form id="cadastro-form">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input 
+                        type="text" 
+                        id="nome" 
+                        name="nome" 
+                        placeholder="João da Silva" 
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="seu@email.com" 
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="document">CPF ou CNPJ</label>
+                    <input 
+                        type="text" 
+                        id="document" 
+                        name="document" 
+                        placeholder="000.000.000-00" 
+                        required
+                    >
+                    <small style="color: var(--gray-medium); margin-top: 4px;">
+                        Digite seu CPF (11 dígitos) ou CNPJ (14 caracteres)
+                    </small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input 
+                        type="tel" 
+                        id="telefone" 
+                        name="telefone" 
+                        placeholder="(11) 99999-9999" 
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="data-nascimento">Data de Nascimento</label>
+                    <input 
+                        type="date" 
+                        id="data-nascimento" 
+                        name="data-nascimento" 
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="logradouro">Endereço</label>
+                    <input 
+                        type="text" 
+                        id="logradouro" 
+                        name="logradouro" 
+                        placeholder="Rua/Avenida, número" 
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="numero">Número</label>
+                    <input 
+                    type="text" 
+                    id="numero" 
+                    name="numero" 
+                    placeholder="123" 
+                    required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="cep">CEP</label>
+                    <input 
+                    type="text" 
+                    id="cep" 
+                    name="cep" 
+                    placeholder="00000-000" 
+                    required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="cidade">Cidade</label>
+                    <input 
+                    type="text" 
+                    id="cidade" 
+                    name="cidade" 
+                    placeholder="São Paulo" 
+                    required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="uf">UF</label>
+                    <input 
+                    type="text" 
+                    id="uf" 
+                    name="uf" 
+                    placeholder="SP" 
+                    maxlength="2" 
+                    required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="renda-mensal">Renda Mensal</label>
+                    <input 
+                    type="number" 
+                    id="renda-mensal" 
+                    name="renda-mensal" 
+                    placeholder="0.00" 
+                    step="0.01" 
+                    min="0"
+                    required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="agencia">Agência</label>
+                    <select id="agencia" name="agencia" required>
+                        <option value="">Selecione uma agência</option>
+                        <option value="0001">0001 - Agência Central</option>
+                        <option value="0002">0002 - Agência Norte</option>
+                        <option value="0003">0003 - Agência Sul</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tipo-conta">Tipo de Conta</label>
+                    <select id="tipo-conta" name="tipo-conta" required>
+                        <option value="CORRENTE">Conta Corrente</option>
+                        <option value="POUPANCA">Conta Poupança</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                <label for="senha">Senha</label>
+                    <input 
+                        type="password" 
+                        id="senha" 
+                        name="senha" 
+                        placeholder="••••••••" 
+                        required
+                    >
+                    <small style="color: var(--gray-medium); margin-top: 4px;">
+                        Mínimo 6 caracteres
+                    </small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmar_senha">Confirmar Senha</label>
+                    <input 
+                        type="password" 
+                        id="confirmar_senha" 
+                        name="confirmar_senha" 
+                        placeholder="••••••••" 
+                        required
+                    >
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-full">
+                    Cadastrar
+                </button>
+            </form>
+            
+            <div class="auth-link">
+                Já tem conta? <a href="index.html">Faça login aqui</a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/utils.js"></script>
+    <script src="js/cadastro.js"></script>
+</body>
+</html>

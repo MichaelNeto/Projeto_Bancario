@@ -1,0 +1,15 @@
+bin/
+obj/
+
+**/bin/
+**/obj/
+
+.vs/
+.vscode/
+
+*.db
+
+src/BancoApi/bin/
+src/BancoApi/obj/
+
+src/BancoApi/banco.db

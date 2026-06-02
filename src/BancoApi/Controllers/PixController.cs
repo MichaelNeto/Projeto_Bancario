@@ -50,10 +50,14 @@ public class PixController : ControllerBase
             return BadRequest(new { mensagem = "Saldo insuficiente para realizar a transação" });
         }
 
+        var chaveNormalizada = request.ChaveDestino.Trim();
+        if (chaveNormalizada.All(char.IsDigit) && chaveNormalizada.Length >= 10)
+            chaveNormalizada = "+" + chaveNormalizada;
+
         var chavePix = await _db.ChavesPix
             .Include(c => c.Cliente)
             .FirstOrDefaultAsync(c =>
-                c.Valor == request.ChaveDestino &&
+                c.Valor == chaveNormalizada &&
                 c.Ativa);
 
         if (chavePix is null)
@@ -69,22 +73,19 @@ public class PixController : ControllerBase
         }
 
 
-if (clienteDestino is null)
-{
-    return NotFound(new { mensagem = "Cliente destino não encontrado" });
-}
+        if (clienteDestino is null)
+        {
+            return NotFound(new { mensagem = "Cliente destino não encontrado" });
+        }
 
-// Impedir PIX para a própria conta
-if (clienteDestino.Id == clienteOrigem.Id)
-{
-    return BadRequest(new
-    {
-        mensagem = "Não é permitido enviar PIX para a própria conta"
-    });
-}
-
-clienteOrigem.Saldo -= request.Valor;
-        
+        // Impedir PIX para a própria conta
+        if (clienteDestino.Id == clienteOrigem.Id)
+        {
+            return BadRequest(new
+            {
+                mensagem = "Não é permitido enviar PIX para a própria conta"
+            });
+        }       
 
         await using var transaction = await _db.Database.BeginTransactionAsync();
         clienteOrigem.Saldo -= request.Valor;

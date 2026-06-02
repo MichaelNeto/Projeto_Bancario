@@ -52,6 +52,7 @@ services:
       - "5000:5000"
 
     environment:
+      ASPNETCORE_URLS: "http://0.0.0.0:5000"
       ConnectionStrings__DefaultConnection: "Host=banco-postgres;Port=5432;Database=banco;Username=postgres;Password=postgres"
       Kafka__BootstrapServers: "banco-kafka:9092"
       Jwt__Key: "SeuSegredoMuitoForte12345678901234567890"

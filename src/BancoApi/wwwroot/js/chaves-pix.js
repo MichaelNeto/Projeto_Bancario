@@ -340,11 +340,17 @@ function showNotification(titulo, mensagem, tipo = 'info') {
         font-weight: 500;
         animation: slideIn 0.3s ease-out;
     `;
+        
+    const tituloDiv = document.createElement('div');
+    tituloDiv.style.cssText = 'font-weight: 600; margin-bottom: 4px;';
+    tituloDiv.textContent = titulo;
 
-    notification.innerHTML = `
-        <div style="font-weight: 600; margin-bottom: 4px;">${titulo}</div>
-        <div style="font-size: 14px;">${mensagem}</div>
-    `;
+    const mensagemDiv = document.createElement('div');
+    mensagemDiv.style.cssText = 'font-size: 14px;';
+    mensagemDiv.textContent = mensagem;
+
+    notification.appendChild(tituloDiv);
+    notification.appendChild(mensagemDiv);
 
     container.appendChild(notification);
 

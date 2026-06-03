@@ -127,10 +127,17 @@ function showNotification(titulo, mensagem, tipo = 'info') {
         animation: slideIn 0.3s ease-out;
     `;
 
+        // 1. Criamos a estrutura HTML estática e segura, sem passar as variáveis direto
     notification.innerHTML = `
-        <div style="font-weight: 600; margin-bottom: 4px;">${titulo}</div>
-        <div style="font-size: 14px;">${mensagem}</div>
+        <div class="notification-title" style="font-weight: 600; margin-bottom: 4px;"></div>
+        <div class="notification-body" style="font-size: 14px;"></div>
     `;
+
+    // 2. Inserimos o título e a mensagem de forma segura como texto puro
+    notification.querySelector('.notification-title').textContent = titulo;
+    notification.querySelector('.notification-body').textContent = mensagem;
+
+    notificationContainer.appendChild(notification);
 
     notificationContainer.appendChild(notification);
 

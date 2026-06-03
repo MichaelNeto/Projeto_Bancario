@@ -10,7 +10,7 @@ Vídeo completo
  
 ## 🎥 Vídeo Completo
 
-[▶ Assistir Demonstração](./docs/demo.mp4)
+[▶ Assistir Demonstração](https://youtu.be/d6qI07w7oBQ?si=XaxbrUWuYMJvLyyN)
 
 #Sobre
 A plataforma implementa uma arquitetura orientada a eventos (Event-Driven Architecture), processando operações como Pix, transações financeiras e crédito de forma assíncrona, escalável e desacoplada.

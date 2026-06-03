@@ -30,12 +30,23 @@ public class ClientesController : ControllerBase
     {
         try
         {
-            if (!ModelState.IsValid)
+           if (!ModelState.IsValid)
             {
                 var errors = ModelState
-                    .Where(kvp => kvp.Value.Errors.Count > 0)
-                    .ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray());
-                return BadRequest(new Dto.ErrorResponse { Status = 400, Message = "Dados inválidos", Errors = errors });
+                    .Where(kvp => kvp.Value != null && kvp.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value!.Errors
+                            .Select(e => e.ErrorMessage)
+                            .ToArray()
+                    );
+
+                return BadRequest(new Dto.ErrorResponse
+                {
+                    Status = 400,
+                    Message = "Dados inválidos",
+                    Errors = errors
+                });
             }
             if (!_validation.ValidarNomeOuRazaoSocial(request.Nome))
             {

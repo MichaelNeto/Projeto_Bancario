@@ -1,139 +1,269 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teste de Integração Front-end</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <a href="teste.html" class="logo">🧪 Testes</a>
-        </div>
+      <div class="container">
+        <a href="teste.html" class="logo">🧪 Testes</a>
+      </div>
     </header>
-    
+
     <main>
-        <div class="container dashboard-container">
-            <div class="card">
-                <h2 class="card-title">📋 Guia de Testes - Front-end</h2>
-                
-                <h3 style="margin-top: 24px; margin-bottom: 16px;">RN01 - Máscara de Documento</h3>
-                <div style="background: var(--gray-light); padding: 16px; border-radius: var(--border-radius); margin-bottom: 16px;">
-                    <p><strong>Teste:</strong> Ir para página de Cadastro</p>
-                    <p><strong>Passos:</strong></p>
-                    <ol style="margin-left: 20px;">
-                        <li>Clicar no campo "CPF ou CNPJ"</li>
-                        <li>Digitar "12345678901" (11 números) → Deve mostrar máscara CPF: "123.456.789-01"</li>
-                        <li>Limpar e digitar "123456789012345" (15 caracteres) → Deve mostrar máscara CNPJ: "12.345.678/9012-34"</li>
-                        <li>Tentar digitar "." (ponto) → Deve ser bloqueado e mostrar alerta</li>
-                    </ol>
-                    <p><strong>Resultado Esperado:</strong> ✅ Máscara aplicada dinamicamente, símbolos bloqueados</p>
-                </div>
-                
-                <h3 style="margin-top: 24px; margin-bottom: 16px;">RN02 - Persistência de JWT e Redirecionamento</h3>
-                <div style="background: var(--gray-light); padding: 16px; border-radius: var(--border-radius); margin-bottom: 16px;">
-                    <p><strong>Teste 1: Login Bem-sucedido</strong></p>
-                    <ol style="margin-left: 20px;">
-                        <li>Fazer login com documento e senha válidos</li>
-                        <li>Verificar localStorage/sessionStorage → Token JWT deve estar salvo</li>
-                        <li>Recarregar a página → Deve permanecer no dashboard</li>
-                    </ol>
-                    
-                    <p><strong>Teste 2: Acesso sem Autenticação</strong></p>
-                    <ol style="margin-left: 20px;">
-                        <li>Limpar localStorage/sessionStorage</li>
-                        <li>Tentar acessar /dashboard.html diretamente na URL</li>
-                        <li>Deve redirecionar para /index.html (login)</li>
-                    </ol>
-                    <p><strong>Resultado Esperado:</strong> ✅ Token salvo, redirecionamento automático sem autenticação</p>
-                </div>
-                
-                <h3 style="margin-top: 24px; margin-bottom: 16px;">RN03 - Envio Autorizado com JWT</h3>
-                <div style="background: var(--gray-light); padding: 16px; border-radius: var(--border-radius); margin-bottom: 16px;">
-                    <p><strong>Teste:</strong> Verificar Headers das Requisições</p>
-                    <ol style="margin-left: 20px;">
-                        <li>Abrir DevTools (F12) → Network</li>
-                        <li>Fazer login</li>
-                        <li>Ir ao Dashboard</li>
-                        <li>Verificar requisição GET /api/extrato</li>
-                        <li>Headers deve conter: <code>Authorization: Bearer eyJ...</code></li>
-                    </ol>
-                    <p><strong>Resultado Esperado:</strong> ✅ Token JWT no header Authorization</p>
-                </div>
-                
-                <h3 style="margin-top: 24px; margin-bottom: 16px;">RN04 - Renderização Dinâmica do Extrato</h3>
-                <div style="background: var(--gray-light); padding: 16px; border-radius: var(--border-radius); margin-bottom: 16px;">
-                    <p><strong>Teste: Verificar Classes CSS</strong></p>
-                    <p><strong>Cenário 1: PIX Recebido</strong></p>
-                    <ol style="margin-left: 20px;">
-                        <li>Abrir DevTools → Elements</li>
-                        <li>Procurar por item do extrato com tipo "PIX Recebido"</li>
-                        <li>Verificar: classe <code>.ganho</code>, cor verde, sinal <code>+</code></li>
-                    </ol>
-                    
-                    <p><strong>Cenário 2: PIX Enviado</strong></p>
-                    <ol style="margin-left: 20px;">
-                        <li>Procurar por item com tipo "PIX Enviado"</li>
-                        <li>Verificar: classe <code>.gasto</code>, cor vermelha, sinal <code>-</code></li>
-                    </ol>
-                    
-                    <p><strong>Cenário 3: Transação Falhada</strong></p>
-                    <ol style="margin-left: 20px;">
-                        <li>Procurar por item com status "FALHOU"</li>
-                        <li>Verificar: classe <code>.estornado</code>, cor cinza, texto riscado, motivo_falha exibido</li>
-                    </ol>
-                    <p><strong>Resultado Esperado:</strong> ✅ Classes CSS aplicadas corretamente, cores e símbolos conforme esperado</p>
-                </div>
-                
-                <h3 style="margin-top: 24px; margin-bottom: 16px;">CA01 - Bloqueio de Símbolos</h3>
-                <div style="background: var(--gray-light); padding: 16px; border-radius: var(--border-radius); margin-bottom: 16px;">
-                    <p><strong>Teste:</strong> Tentar digitar caracteres especiais</p>
-                    <ol style="margin-left: 20px;">
-                        <li>Ir para Cadastro</li>
-                        <li>Focar no campo "CPF ou CNPJ"</li>
-                        <li>Tentar digitar: ".", "-", "/"</li>
-                        <li>Verificar: Caracteres não aparecem, alerta "Apenas letras e números são permitidos"</li>
-                    </ol>
-                    <p><strong>Resultado Esperado:</strong> ✅ Símbolos bloqueados, alerta exibido</p>
-                </div>
-                
-                <h3 style="margin-top: 24px; margin-bottom: 16px;">CA02 - Redirecionamento de Segurança</h3>
-                <div style="background: var(--gray-light); padding: 16px; border-radius: var(--border-radius); margin-bottom: 16px;">
-                    <p><strong>Teste:</strong> Acessar URL protegida sem autenticação</p>
-                    <ol style="margin-left: 20px;">
-                        <li>Abrir nova aba anônima ou limpar cookies/localStorage</li>
-                        <li>Digitar URL: <code>http://localhost:5000/dashboard.html</code></li>
-                        <li>Verificar: Redireciona imediatamente para <code>http://localhost:5000/index.html</code></li>
-                    </ol>
-                    <p><strong>Resultado Esperado:</strong> ✅ Redirecionado para login</p>
-                </div>
-                
-                <h3 style="margin-top: 24px; margin-bottom: 16px;">CA03 - Destino Visual do Extrato</h3>
-                <div style="background: var(--gray-light); padding: 16px; border-radius: var(--border-radius); margin-bottom: 16px;">
-                    <p><strong>Teste:</strong> Verificar renderização de PIX recebido</p>
-                    <ol style="margin-left: 20px;">
-                        <li>Fazer login</li>
-                        <li>Verificar extrato</li>
-                        <li>Procurar por PIX de R$ 350,00 (exemplo de transação recebida)</li>
-                        <li>Verificar: "+ R$ 350,00" em cor verde, com classe <code>.ganho</code></li>
-                    </ol>
-                    <p><strong>Resultado Esperado:</strong> ✅ Valor exibido com sinal + e cor verde</p>
-                </div>
-                
-                <h3 style="margin-top: 24px; margin-bottom: 16px;">Checklist Geral</h3>
-                <ul style="margin-left: 20px;">
-                    <li>✅ Responsividade: Teste em desktop, tablet e mobile</li>
-                    <li>✅ Alertas: Verifique se aparecem corretamente (success, error, warning, info)</li>
-                    <li>✅ Validações: Todos os campos obrigatórios validam antes de enviar</li>
-                    <li>✅ Armazenamento: Token persiste entre recarregamentos</li>
-                    <li>✅ Performance: Extrato carrega e atualiza a cada 30 segundos</li>
-                    <li>✅ Segurança: Logout limpa tokens do storage</li>
-                </ul>
-            </div>
+      <div class="container dashboard-container">
+        <div class="card">
+          <h2 class="card-title">📋 Guia de Testes - Front-end</h2>
+
+          <h3 style="margin-top: 24px; margin-bottom: 16px">
+            RN01 - Máscara de Documento
+          </h3>
+          <div
+            style="
+              background: var(--gray-light);
+              padding: 16px;
+              border-radius: var(--border-radius);
+              margin-bottom: 16px;
+            "
+          >
+            <p><strong>Teste:</strong> Ir para página de Cadastro</p>
+            <p><strong>Passos:</strong></p>
+            <ol style="margin-left: 20px">
+              <li>Clicar no campo "CPF ou CNPJ"</li>
+              <li>
+                Digitar "12345678901" (11 números) → Deve mostrar máscara CPF:
+                "123.456.789-01"
+              </li>
+              <li>
+                Limpar e digitar "123456789012345" (15 caracteres) → Deve
+                mostrar máscara CNPJ: "12.345.678/9012-34"
+              </li>
+              <li>
+                Tentar digitar "." (ponto) → Deve ser bloqueado e mostrar alerta
+              </li>
+            </ol>
+            <p>
+              <strong>Resultado Esperado:</strong> ✅ Máscara aplicada
+              dinamicamente, símbolos bloqueados
+            </p>
+          </div>
+
+          <h3 style="margin-top: 24px; margin-bottom: 16px">
+            RN02 - Persistência de JWT e Redirecionamento
+          </h3>
+          <div
+            style="
+              background: var(--gray-light);
+              padding: 16px;
+              border-radius: var(--border-radius);
+              margin-bottom: 16px;
+            "
+          >
+            <p><strong>Teste 1: Login Bem-sucedido</strong></p>
+            <ol style="margin-left: 20px">
+              <li>Fazer login com documento e senha válidos</li>
+              <li>
+                Verificar localStorage/sessionStorage → Token JWT deve estar
+                salvo
+              </li>
+              <li>Recarregar a página → Deve permanecer no dashboard</li>
+            </ol>
+
+            <p><strong>Teste 2: Acesso sem Autenticação</strong></p>
+            <ol style="margin-left: 20px">
+              <li>Limpar localStorage/sessionStorage</li>
+              <li>Tentar acessar /dashboard.html diretamente na URL</li>
+              <li>Deve redirecionar para /index.html (login)</li>
+            </ol>
+            <p>
+              <strong>Resultado Esperado:</strong> ✅ Token salvo,
+              redirecionamento automático sem autenticação
+            </p>
+          </div>
+
+          <h3 style="margin-top: 24px; margin-bottom: 16px">
+            RN03 - Envio Autorizado com JWT
+          </h3>
+          <div
+            style="
+              background: var(--gray-light);
+              padding: 16px;
+              border-radius: var(--border-radius);
+              margin-bottom: 16px;
+            "
+          >
+            <p><strong>Teste:</strong> Verificar Headers das Requisições</p>
+            <ol style="margin-left: 20px">
+              <li>Abrir DevTools (F12) → Network</li>
+              <li>Fazer login</li>
+              <li>Ir ao Dashboard</li>
+              <li>Verificar requisição GET /api/extrato</li>
+              <li>
+                Headers deve conter: <code>Authorization: Bearer eyJ...</code>
+              </li>
+            </ol>
+            <p>
+              <strong>Resultado Esperado:</strong> ✅ Token JWT no header
+              Authorization
+            </p>
+          </div>
+
+          <h3 style="margin-top: 24px; margin-bottom: 16px">
+            RN04 - Renderização Dinâmica do Extrato
+          </h3>
+          <div
+            style="
+              background: var(--gray-light);
+              padding: 16px;
+              border-radius: var(--border-radius);
+              margin-bottom: 16px;
+            "
+          >
+            <p><strong>Teste: Verificar Classes CSS</strong></p>
+            <p><strong>Cenário 1: PIX Recebido</strong></p>
+            <ol style="margin-left: 20px">
+              <li>Abrir DevTools → Elements</li>
+              <li>Procurar por item do extrato com tipo "PIX Recebido"</li>
+              <li>
+                Verificar: classe <code>.ganho</code>, cor verde, sinal
+                <code>+</code>
+              </li>
+            </ol>
+
+            <p><strong>Cenário 2: PIX Enviado</strong></p>
+            <ol style="margin-left: 20px">
+              <li>Procurar por item com tipo "PIX Enviado"</li>
+              <li>
+                Verificar: classe <code>.gasto</code>, cor vermelha, sinal
+                <code>-</code>
+              </li>
+            </ol>
+
+            <p><strong>Cenário 3: Transação Falhada</strong></p>
+            <ol style="margin-left: 20px">
+              <li>Procurar por item com status "FALHOU"</li>
+              <li>
+                Verificar: classe <code>.estornado</code>, cor cinza, texto
+                riscado, motivo_falha exibido
+              </li>
+            </ol>
+            <p>
+              <strong>Resultado Esperado:</strong> ✅ Classes CSS aplicadas
+              corretamente, cores e símbolos conforme esperado
+            </p>
+          </div>
+
+          <h3 style="margin-top: 24px; margin-bottom: 16px">
+            CA01 - Bloqueio de Símbolos
+          </h3>
+          <div
+            style="
+              background: var(--gray-light);
+              padding: 16px;
+              border-radius: var(--border-radius);
+              margin-bottom: 16px;
+            "
+          >
+            <p><strong>Teste:</strong> Tentar digitar caracteres especiais</p>
+            <ol style="margin-left: 20px">
+              <li>Ir para Cadastro</li>
+              <li>Focar no campo "CPF ou CNPJ"</li>
+              <li>Tentar digitar: ".", "-", "/"</li>
+              <li>
+                Verificar: Caracteres não aparecem, alerta "Apenas letras e
+                números são permitidos"
+              </li>
+            </ol>
+            <p>
+              <strong>Resultado Esperado:</strong> ✅ Símbolos bloqueados,
+              alerta exibido
+            </p>
+          </div>
+
+          <h3 style="margin-top: 24px; margin-bottom: 16px">
+            CA02 - Redirecionamento de Segurança
+          </h3>
+          <div
+            style="
+              background: var(--gray-light);
+              padding: 16px;
+              border-radius: var(--border-radius);
+              margin-bottom: 16px;
+            "
+          >
+            <p>
+              <strong>Teste:</strong> Acessar URL protegida sem autenticação
+            </p>
+            <ol style="margin-left: 20px">
+              <li>Abrir nova aba anônima ou limpar cookies/localStorage</li>
+              <li>
+                Digitar URL: <code>http://localhost:5000/dashboard.html</code>
+              </li>
+              <li>
+                Verificar: Redireciona imediatamente para
+                <code>http://localhost:5000/index.html</code>
+              </li>
+            </ol>
+            <p>
+              <strong>Resultado Esperado:</strong> ✅ Redirecionado para login
+            </p>
+          </div>
+
+          <h3 style="margin-top: 24px; margin-bottom: 16px">
+            CA03 - Destino Visual do Extrato
+          </h3>
+          <div
+            style="
+              background: var(--gray-light);
+              padding: 16px;
+              border-radius: var(--border-radius);
+              margin-bottom: 16px;
+            "
+          >
+            <p>
+              <strong>Teste:</strong> Verificar renderização de PIX recebido
+            </p>
+            <ol style="margin-left: 20px">
+              <li>Fazer login</li>
+              <li>Verificar extrato</li>
+              <li>
+                Procurar por PIX de R$ 350,00 (exemplo de transação recebida)
+              </li>
+              <li>
+                Verificar: "+ R$ 350,00" em cor verde, com classe
+                <code>.ganho</code>
+              </li>
+            </ol>
+            <p>
+              <strong>Resultado Esperado:</strong> ✅ Valor exibido com sinal +
+              e cor verde
+            </p>
+          </div>
+
+          <h3 style="margin-top: 24px; margin-bottom: 16px">Checklist Geral</h3>
+          <ul style="margin-left: 20px">
+            <li>✅ Responsividade: Teste em desktop, tablet e mobile</li>
+            <li>
+              ✅ Alertas: Verifique se aparecem corretamente (success, error,
+              warning, info)
+            </li>
+            <li>
+              ✅ Validações: Todos os campos obrigatórios validam antes de
+              enviar
+            </li>
+            <li>✅ Armazenamento: Token persiste entre recarregamentos</li>
+            <li>
+              ✅ Performance: Extrato carrega e atualiza a cada 30 segundos
+            </li>
+            <li>✅ Segurança: Logout limpa tokens do storage</li>
+          </ul>
         </div>
+      </div>
     </main>
-    
+
     <script src="js/utils.js"></script>
-</body>
+  </body>
 </html>

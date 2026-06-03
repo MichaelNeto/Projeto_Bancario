@@ -1,315 +1,373 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Minhas Chaves Pix - Banco</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css" />
     <style>
-        .chaves-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+      .chaves-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
 
-        .chave-item {
-            padding: 15px;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f9fafb;
-        }
+      .chave-item {
+        padding: 15px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f9fafb;
+      }
 
-        .chave-info {
-            flex: 1;
-        }
+      .chave-info {
+        flex: 1;
+      }
 
-        .chave-tipo {
-            font-weight: 600;
-            color: #1e40af;
-            margin-bottom: 4px;
-        }
+      .chave-tipo {
+        font-weight: 600;
+        color: #1e40af;
+        margin-bottom: 4px;
+      }
 
-        .chave-valor {
-            color: #6b7280;
-            font-size: 14px;
-            font-family: monospace;
-        }
+      .chave-valor {
+        color: #6b7280;
+        font-size: 14px;
+        font-family: monospace;
+      }
 
-        .chave-data {
-            color: #9ca3af;
-            font-size: 12px;
-            margin-top: 4px;
-        }
+      .chave-data {
+        color: #9ca3af;
+        font-size: 12px;
+        margin-top: 4px;
+      }
 
-        .btn-delete {
-            background-color: #dc2626;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-        }
+      .btn-delete {
+        background-color: #dc2626;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+      }
 
-        .btn-delete:hover {
-            background-color: #b91c1c;
-        }
+      .btn-delete:hover {
+        background-color: #b91c1c;
+      }
 
-        .form-group-radio {
-            margin-bottom: 20px;
-        }
+      .form-group-radio {
+        margin-bottom: 20px;
+      }
 
-        .radio-group {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
+      .radio-group {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+      }
 
-        .radio-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+      .radio-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
-        .radio-item input[type="radio"] {
-            cursor: pointer;
-            width: 18px;
-            height: 18px;
-        }
+      .radio-item input[type="radio"] {
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+      }
 
-        .radio-item label {
-            cursor: pointer;
-            font-weight: 500;
-        }
+      .radio-item label {
+        cursor: pointer;
+        font-weight: 500;
+      }
 
-        .input-group {
-            display: none;
-            margin-bottom: 15px;
-        }
+      .input-group {
+        display: none;
+        margin-bottom: 15px;
+      }
 
-        .input-group.show {
-            display: block;
-        }
+      .input-group.show {
+        display: block;
+      }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.3s ease-in;
-        }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        animation: fadeIn 0.3s ease-in;
+      }
 
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      .modal.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: slideIn 0.3s ease-out;
-        }
+      .modal-content {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        animation: slideIn 0.3s ease-out;
+      }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e5e7eb;
-        }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e5e7eb;
+      }
 
-        .modal-header h2 {
-            margin: 0;
-            font-size: 20px;
-        }
+      .modal-header h2 {
+        margin: 0;
+        font-size: 20px;
+      }
 
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: #6b7280;
-        }
+      .close-btn {
+        background: none;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+        color: #6b7280;
+      }
 
-        .close-btn:hover {
-            color: #1f2937;
-        }
+      .close-btn:hover {
+        color: #1f2937;
+      }
 
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #e5e7eb;
-        }
+      .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e5e7eb;
+      }
 
-        .tab-btn {
-            padding: 10px 15px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            color: #6b7280;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
+      .tab-btn {
+        padding: 10px 15px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        color: #6b7280;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s;
+      }
 
-        .tab-btn.active {
-            color: #1e40af;
-            border-bottom-color: #1e40af;
-        }
+      .tab-btn.active {
+        color: #1e40af;
+        border-bottom-color: #1e40af;
+      }
 
-        .tab-content {
-            display: none;
-        }
+      .tab-content {
+        display: none;
+      }
 
-        .tab-content.show {
-            display: block;
-        }
+      .tab-content.show {
+        display: block;
+      }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
+        to {
+          opacity: 1;
+        }
+      }
 
-        @keyframes slideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+      @keyframes slideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
         }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
 
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #9ca3af;
-        }
+      .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #9ca3af;
+      }
 
-        .empty-state p {
-            margin: 0;
-        }
+      .empty-state p {
+        margin: 0;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <a href="index.html" class="logo">🏦 Banco</a>
-            <nav class="nav-links">
-                <ul style="list-style: none; display: flex; gap: 24px;">
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="minhas-chaves-pix.html" class="active">Chaves Pix</a></li>
-                    <li><a href="cadastro.html">Abrir Conta</a></li>
-                </ul>
-            </nav>
-            <div class="nav-user">
-                <div class="user-info">
-                    <span id="account-name" style="font-weight: 600; display: block; margin-bottom: 4px;">👤 Carregando...</span>
-                    <span id="account-number" style="font-size: 12px; opacity: 0.9;">Conta: --</span>
-                </div>
-                <button id="logout-btn" class="btn btn-danger">Sair</button>
-            </div>
+      <div class="container">
+        <a href="index.html" class="logo">🏦 Banco</a>
+        <nav class="nav-links">
+          <ul style="list-style: none; display: flex; gap: 24px">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li>
+              <a href="minhas-chaves-pix.html" class="active">Chaves Pix</a>
+            </li>
+            <li><a href="cadastro.html">Abrir Conta</a></li>
+          </ul>
+        </nav>
+        <div class="nav-user">
+          <div class="user-info">
+            <span
+              id="account-name"
+              style="font-weight: 600; display: block; margin-bottom: 4px"
+              >👤 Carregando...</span
+            >
+            <span id="account-number" style="font-size: 12px; opacity: 0.9"
+              >Conta: --</span
+            >
+          </div>
+          <button id="logout-btn" class="btn btn-danger">Sair</button>
         </div>
+      </div>
     </header>
 
     <main>
-        <div class="chaves-container">
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="minhas-chaves">Minhas Chaves</button>
-                <button class="tab-btn" data-tab="nova-chave">+ Nova Chave</button>
-            </div>
-
-            <!-- Aba: Minhas Chaves -->
-            <div class="tab-content show" id="minhas-chaves">
-                <h2 style="margin-top: 0;">Minhas Chaves Pix</h2>
-                <div id="chaves-list">
-                    <p class="no-transactions">Carregando...</p>
-                </div>
-            </div>
-
-            <!-- Aba: Nova Chave -->
-            <div class="tab-content" id="nova-chave">
-                <h2 style="margin-top: 0;">Registrar Nova Chave Pix</h2>
-                
-                <form id="nova-chave-form">
-                    <div class="form-group-radio">
-                        <label style="font-weight: 600; margin-bottom: 10px; display: block;">Tipo de Chave:</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" id="tipo-cpf" name="tipo-chave" value="CPF">
-                                <label for="tipo-cpf">CPF</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="tipo-email" name="tipo-chave" value="EMAIL">
-                                <label for="tipo-email">E-mail</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="tipo-telefone" name="tipo-chave" value="TELEFONE">
-                                <label for="tipo-telefone">Telefone</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="tipo-aleatoria" name="tipo-chave" value="ALEATORIA">
-                                <label for="tipo-aleatoria">Aleatória</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="input-group" id="input-cpf">
-                        <label for="valor-cpf">CPF (formato: 123.456.789-00)</label>
-                        <input type="text" id="valor-cpf" placeholder="123.456.789-00" maxlength="14">
-                        <small style="color: #6b7280;">Deve ser igual ao CPF da sua conta</small>
-                    </div>
-
-                    <div class="input-group" id="input-email">
-                        <label for="valor-email">E-mail</label>
-                        <input type="email" id="valor-email" placeholder="seu@email.com">
-                    </div>
-
-                    <div class="input-group" id="input-telefone">
-                        <label for="valor-telefone">Telefone (formato: +5511999999999)</label>
-                        <input type="tel" id="valor-telefone" placeholder="+5511999999999">
-                    </div>
-
-                    <div class="input-group" id="input-aleatoria" style="display: block;">
-                        <p style="color: #6b7280; font-size: 14px; margin: 0;">
-                            Uma chave aleatória será gerada automaticamente
-                        </p>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-full" style="margin-top: 20px;">
-                        Registrar Chave Pix
-                    </button>
-                </form>
-            </div>
+      <div class="chaves-container">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="minhas-chaves">
+            Minhas Chaves
+          </button>
+          <button class="tab-btn" data-tab="nova-chave">+ Nova Chave</button>
         </div>
+
+        <!-- Aba: Minhas Chaves -->
+        <div class="tab-content show" id="minhas-chaves">
+          <h2 style="margin-top: 0">Minhas Chaves Pix</h2>
+          <div id="chaves-list">
+            <p class="no-transactions">Carregando...</p>
+          </div>
+        </div>
+
+        <!-- Aba: Nova Chave -->
+        <div class="tab-content" id="nova-chave">
+          <h2 style="margin-top: 0">Registrar Nova Chave Pix</h2>
+
+          <form id="nova-chave-form">
+            <div class="form-group-radio">
+              <label
+                style="font-weight: 600; margin-bottom: 10px; display: block"
+                >Tipo de Chave:</label
+              >
+              <div class="radio-group">
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    id="tipo-cpf"
+                    name="tipo-chave"
+                    value="CPF"
+                  />
+                  <label for="tipo-cpf">CPF</label>
+                </div>
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    id="tipo-email"
+                    name="tipo-chave"
+                    value="EMAIL"
+                  />
+                  <label for="tipo-email">E-mail</label>
+                </div>
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    id="tipo-telefone"
+                    name="tipo-chave"
+                    value="TELEFONE"
+                  />
+                  <label for="tipo-telefone">Telefone</label>
+                </div>
+                <div class="radio-item">
+                  <input
+                    type="radio"
+                    id="tipo-aleatoria"
+                    name="tipo-chave"
+                    value="ALEATORIA"
+                  />
+                  <label for="tipo-aleatoria">Aleatória</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="input-group" id="input-cpf">
+              <label for="valor-cpf">CPF (formato: 123.456.789-00)</label>
+              <input
+                type="text"
+                id="valor-cpf"
+                placeholder="123.456.789-00"
+                maxlength="14"
+              />
+              <small style="color: #6b7280"
+                >Deve ser igual ao CPF da sua conta</small
+              >
+            </div>
+
+            <div class="input-group" id="input-email">
+              <label for="valor-email">E-mail</label>
+              <input
+                type="email"
+                id="valor-email"
+                placeholder="seu@email.com"
+              />
+            </div>
+
+            <div class="input-group" id="input-telefone">
+              <label for="valor-telefone"
+                >Telefone (formato: +5511999999999)</label
+              >
+              <input
+                type="tel"
+                id="valor-telefone"
+                placeholder="+5511999999999"
+              />
+            </div>
+
+            <div
+              class="input-group"
+              id="input-aleatoria"
+              style="display: block"
+            >
+              <p style="color: #6b7280; font-size: 14px; margin: 0">
+                Uma chave aleatória será gerada automaticamente
+              </p>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary w-full"
+              style="margin-top: 20px"
+            >
+              Registrar Chave Pix
+            </button>
+          </form>
+        </div>
+      </div>
     </main>
 
     <script src="js/utils.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/chaves-pix.js"></script>
-</body>
+  </body>
 </html>

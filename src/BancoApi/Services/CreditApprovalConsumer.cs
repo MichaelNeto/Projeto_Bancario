@@ -36,7 +36,7 @@ public class CreditApprovalConsumer : BackgroundService
             try
             {
                 _consumer.Subscribe("cliente-cadastrado");
-                
+
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     try

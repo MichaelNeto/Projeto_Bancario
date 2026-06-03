@@ -1,51 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Banco - Login</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
     <div class="auth-container">
-        <div class="auth-box">
-            <h1>🏦 Banco</h1>
-            
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="documento">CPF ou CNPJ</label>
-                    <input 
-                        type="text" 
-                        id="documento" 
-                        name="documento" 
-                        placeholder="000.000.000-00" 
-                        required
-                    >
-                </div>
-                
-                <div class="form-group">
-                    <label for="senha">Senha</label>
-                    <input 
-                        type="password" 
-                        id="senha" 
-                        name="senha" 
-                        placeholder="••••••••" 
-                        required
-                    >
-                </div>
-                
-                <button type="submit" class="btn btn-primary w-full">
-                    Entrar
-                </button>
-            </form>
-            
-            <div class="auth-link">
-                Não tem conta? <a href="cadastro.html" class="link-cadastro">Cadastre-se aqui</a>
-            </div>
+      <div class="auth-box">
+        <h1>🏦 Banco</h1>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label for="documento">CPF ou CNPJ</label>
+            <input
+              type="text"
+              id="documento"
+              name="documento"
+              placeholder="000.000.000-00"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="senha">Senha</label>
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary w-full">Entrar</button>
+        </form>
+
+        <div class="auth-link">
+          Não tem conta?
+          <a href="cadastro.html" class="link-cadastro">Cadastre-se aqui</a>
         </div>
+      </div>
     </div>
-    
+
     <script src="js/utils.js"></script>
     <script src="js/auth.js"></script>
-</body>
+  </body>
 </html>

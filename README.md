@@ -1,4 +1,5 @@
-Core Banking Platform — Event-Driven and High Performance
+#Core Banking Platform — Event-Driven and High Performance
+
 Sistema de Core Banking desenvolvido com foco em alta concorrência, resiliência e processamento de eventos em tempo real, utilizando .NET, Kafka e PostgreSQL.
 
 Demonstração
@@ -11,12 +12,12 @@ Vídeo completo
 
 [▶ Assistir Demonstração](./docs/demo.mp4)
 
-Sobre
+#Sobre
 A plataforma implementa uma arquitetura orientada a eventos (Event-Driven Architecture), processando operações como Pix, transações financeiras e crédito de forma assíncrona, escalável e desacoplada.
 
 O sistema foi projetado para simular condições reais de produção, incluindo cenários de alta concorrência e processamento distribuído.
 
-Arquitetura
+#Arquitetura
 Clean Architecture em .NET (C#)
 
 Microserviços (C# e Java)
@@ -27,7 +28,7 @@ Processamento orientado a eventos (EDA)
 
 Infraestrutura containerizada com Docker
 
-Diferencial Técnico
+#Diferencial Técnico
 O projeto incorpora UVM (Universal Verification Methodology) como estratégia avançada de simulação de cenários.
 
 Essa abordagem permite:
@@ -61,7 +62,7 @@ BCrypt (criptografia de senha)
 
 JavaScript (frontend)
 
-Estratégia de Testes
+#Estratégia de Testes
 O projeto adota uma abordagem completa:
 
 Testes unitários (xUnit, JUnit)
